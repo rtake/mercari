@@ -2,6 +2,7 @@ import random
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import urllib.request
 
 URL = "https://www.mercari.com/jp/"
 
@@ -42,16 +43,16 @@ item = item_list[0]
 
 driver.get(item)
 
-image = driver.find_element_by_css_selector('body > div.default-container > section > div.item-main-content.clearfix > div > div > div.owl-stage-outer > div > div > div > img').get_attribute("src")
+url_image = driver.find_element_by_css_selector('body > div.default-container > section > div.item-main-content.clearfix > div > div > div.owl-stage-outer > div > div > div > img').get_attribute("src")
 # image = driver.find_element_by_class_name("owl-lazy").get_attribute("src")
 # image.find_elements_by_tag_name("img")#.get_attribute("src")
 
-print (image)
+urllib.request.urlretrieve(url_image, 'test.png')
+item_name = driver.find_element_by_css_selector("body > div.default-container > section > h2").text
+print (item_name)
 
-
-# print (image.get_attribute("data-src"))
-
-
+item_description = driver.find_element_by_css_selector("body > div.default-container > section > div.item-description.f14 > p").text
+print (item_description)
 
 # driver.quit()
 
